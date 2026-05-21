@@ -92,19 +92,32 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="flex-1 flex items-center justify-center px-4 py-12 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="w-full max-w-md">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            Crear Cuenta
-          </h1>
-          <p className="text-gray-600 text-center mb-8">
-            Regístrate para acceder a la aplicación
-          </p>
+    <main className="animated-bg min-h-screen flex items-center justify-center px-4 py-12 relative" suppressHydrationWarning>
+      {/* Glow Orbs */}
+      <div className="glow-orb glow-orb-1"></div>
+      <div className="glow-orb glow-orb-2"></div>
 
+      <div className="w-full max-w-md relative z-10">
+        {/* Card Container */}
+        <div className="bg-slate-800 rounded-2xl shadow-2xl p-8 border border-slate-700">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <span className="text-white font-bold text-2xl">A</span>
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-2">
+              Crear Cuenta
+            </h1>
+            <p className="text-slate-400">
+              Únete a nuestra plataforma empresarial
+            </p>
+          </div>
+
+          {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6">
-              {error}
+            <div className="bg-red-900/30 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6 flex items-start gap-3">
+              <span className="text-lg">⚠️</span>
+              <span>{error}</span>
             </div>
           )}
 
@@ -112,7 +125,7 @@ export default function RegisterPage() {
             <div className="mb-4">
               <label
                 htmlFor="displayName"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-semibold text-slate-300 mb-2"
               >
                 Nombre Completo
               </label>
@@ -123,7 +136,7 @@ export default function RegisterPage() {
                 value={formData.displayName}
                 onChange={handleChange}
                 placeholder="Tu nombre"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 required
               />
             </div>
@@ -131,9 +144,9 @@ export default function RegisterPage() {
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-semibold text-slate-300 mb-2"
               >
-                Email
+                Email Corporativo
               </label>
               <input
                 id="email"
@@ -141,8 +154,8 @@ export default function RegisterPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="tu@email.com"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="tu@empresa.com"
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 required
               />
             </div>
@@ -150,7 +163,7 @@ export default function RegisterPage() {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-semibold text-slate-300 mb-2"
               >
                 Contraseña
               </label>
@@ -161,10 +174,10 @@ export default function RegisterPage() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="••••••••"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-slate-400 mt-1">
                 Mínimo 6 caracteres
               </p>
             </div>
@@ -172,7 +185,7 @@ export default function RegisterPage() {
             <div className="mb-6">
               <label
                 htmlFor="confirmPassword"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="block text-sm font-semibold text-slate-300 mb-2"
               >
                 Confirmar Contraseña
               </label>
@@ -183,7 +196,7 @@ export default function RegisterPage() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="••••••••"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 required
               />
             </div>
@@ -191,20 +204,25 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition"
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-slate-600 disabled:to-slate-700 text-white font-bold py-3 px-4 rounded-lg transition-all shadow-lg hover:shadow-blue-500/50 disabled:shadow-none"
             >
               {loading ? "Registrando..." : "Registrarse"}
             </button>
           </form>
 
           {/* Link a Login */}
-          <p className="text-center text-gray-600 mt-6">
+          <p className="text-center text-slate-400 mt-6">
             ¿Ya tienes cuenta?{" "}
-            <Link href="/login" className="text-indigo-600 hover:text-indigo-700 font-bold">
+            <Link href="/login" className="text-blue-400 hover:text-blue-300 font-semibold transition">
               Inicia sesión aquí
             </Link>
           </p>
         </div>
+
+        {/* Footer */}
+        <p className="text-center text-slate-500 text-xs mt-6">
+          Plataforma segura con encriptación de nivel empresarial
+        </p>
       </div>
     </main>
   );

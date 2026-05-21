@@ -24,3 +24,370 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ===== GRADIENT ANIMATIONS ===== */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== WAVE ANIMATIONS ===== */
+@keyframes wave {
+  0% {
+    transform: translateX(-100%) translateY(0) scaleY(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateX(-50%) translateY(-40px) scaleY(1.5);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0) translateY(-60px) scaleY(2);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(50%) translateY(-40px) scaleY(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(0) scaleY(1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes wave-reverse {
+  0% {
+    transform: translateX(100%) translateY(0) scaleY(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateX(50%) translateY(40px) scaleY(1.5);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(0) translateY(60px) scaleY(2);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(-50%) translateY(40px) scaleY(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%) translateY(0) scaleY(1);
+    opacity: 0.8;
+  }
+}
+
+/* ===== FLOAT ANIMATIONS ===== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-30px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-50px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(-30px) translateX(10px);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-40px);
+  }
+}
+
+/* ===== PULSE ANIMATIONS ===== */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ===== SHIMMER ANIMATIONS ===== */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* ===== ROTATE ANIMATIONS ===== */
+@keyframes rotate-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== BLUR ANIMATIONS ===== */
+@keyframes blur-in {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+.animated-bg {
+  background: linear-gradient(
+    -45deg,
+    #1e293b,
+    #0f172a,
+    #1e3a8a,
+    #0c4a6e,
+    #1e293b
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Base overlay with grid pattern */
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 50%);
+  animation: float-slow 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Grid overlay - REMOVED */
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
+
+/* ===== GLOW ORBS ===== */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.glow-orb-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(59, 130, 246, 0.4);
+  top: -200px;
+  right: -200px;
+  animation: float 10s ease-in-out infinite, pulse-glow 3s ease-in-out infinite;
+}
+
+.glow-orb-2 {
+  width: 450px;
+  height: 450px;
+  background: rgba(139, 92, 246, 0.4);
+  bottom: -150px;
+  left: -150px;
+  animation: float 12s ease-in-out infinite reverse, pulse-glow 4s ease-in-out infinite 1s;
+}
+
+.glow-orb-3 {
+  width: 400px;
+  height: 400px;
+  background: rgba(14, 165, 233, 0.35);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-glow 5s ease-in-out infinite 2s;
+}
+
+/* ===== WAVE ELEMENTS ===== */
+.wave-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 300px;
+  left: -50%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.4) 25%,
+    rgba(59, 130, 246, 0.6) 50%,
+    rgba(59, 130, 246, 0.4) 75%,
+    transparent 100%
+  );
+  clip-path: polygon(
+    0% 70%,
+    2% 65%, 4% 60%, 6% 58%, 8% 57%, 10% 58%, 12% 60%, 14% 65%, 16% 70%,
+    18% 75%, 20% 80%, 22% 82%, 24% 83%, 26% 82%, 28% 80%, 30% 75%, 32% 70%,
+    34% 65%, 36% 60%, 38% 58%, 40% 57%, 42% 58%, 44% 60%, 46% 65%, 48% 70%,
+    50% 75%, 52% 80%, 54% 82%, 56% 83%, 58% 82%, 60% 80%, 62% 75%, 64% 70%,
+    66% 65%, 68% 60%, 70% 58%, 72% 57%, 74% 58%, 76% 60%, 78% 65%, 80% 70%,
+    82% 75%, 84% 80%, 86% 82%, 88% 83%, 90% 82%, 92% 80%, 94% 75%, 96% 70%,
+    98% 65%, 100% 60%,
+    100% 100%, 0% 100%
+  );
+  animation: wave 6s linear infinite;
+  top: 15%;
+}
+
+.wave:nth-child(2) {
+  animation: wave-reverse 8s linear infinite;
+  opacity: 0.7;
+  top: 30%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(139, 92, 246, 0.3) 25%,
+    rgba(139, 92, 246, 0.5) 50%,
+    rgba(139, 92, 246, 0.3) 75%,
+    transparent 100%
+  );
+}
+
+.wave:nth-child(3) {
+  animation: wave 10s linear infinite;
+  opacity: 0.5;
+  top: 45%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(14, 165, 233, 0.3) 25%,
+    rgba(14, 165, 233, 0.5) 50%,
+    rgba(14, 165, 233, 0.3) 75%,
+    transparent 100%
+  );
+}
+
+/* ===== PULSE RINGS ===== */
+.pulse-ring {
+  position: absolute;
+  border: 3px solid rgba(59, 130, 246, 0.8);
+  border-radius: 50%;
+  animation: pulse-ring 2.5s ease-out infinite;
+}
+
+.pulse-ring-1 {
+  width: 150px;
+  height: 150px;
+  top: 15%;
+  left: 8%;
+  animation-delay: 0s;
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+.pulse-ring-2 {
+  width: 120px;
+  height: 120px;
+  bottom: 15%;
+  right: 12%;
+  border-color: rgba(139, 92, 246, 0.8);
+  animation-delay: 0.5s;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+}
+
+.pulse-ring-3 {
+  width: 180px;
+  height: 180px;
+  top: 45%;
+  right: 8%;
+  border-color: rgba(14, 165, 233, 0.8);
+  animation-delay: 1s;
+  box-shadow: 0 0 30px rgba(14, 165, 233, 0.6);
+}
+
+/* ===== FLOATING PARTICLES ===== */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: float 20s infinite;
+  pointer-events: none;
+}
+
+.particle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.particle:nth-child(2) { top: 20%; right: 15%; animation-delay: 2s; }
+.particle:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+.particle:nth-child(4) { top: 50%; right: 5%; animation-delay: 6s; }
+.particle:nth-child(5) { bottom: 10%; right: 20%; animation-delay: 8s; }
+
+/* ===== CONTENT ANIMATIONS ===== */
+.fade-in-up {
+  animation: blur-in 0.8s ease-out;
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* ===== CARD HOVER EFFECTS ===== */
+.card-hover {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.card-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  animation: shimmer 3s infinite;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+}

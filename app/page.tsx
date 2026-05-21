@@ -6,69 +6,171 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
 
   return (
-    <main className="flex-1 flex flex-col items-center justify-center px-4 py-12 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-2xl w-full text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
-          Autenticación Profesional
-        </h1>
-        <p className="text-xl text-gray-600 mb-8">
-          Una aplicación Next.js con autenticación segura usando NextAuth.js,
-          Firebase y OAuth
-        </p>
+    <main className="animated-bg min-h-screen flex flex-col" suppressHydrationWarning>
+      {/* Wave Container */}
+      <div className="wave-container">
+        <div className="wave"></div>
+        <div className="wave"></div>
+        <div className="wave"></div>
+      </div>
 
-        {session ? (
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <p className="text-lg text-gray-700 mb-4">
-              ¡Bienvenido, <span className="font-bold">{session.user?.name}</span>!
-            </p>
-            <p className="text-gray-600 mb-6">
-              Email: <span className="font-mono">{session.user?.email}</span>
-            </p>
-            <Link
-              href="/dashboard"
-              className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition"
-            >
-              Ir al Dashboard
-            </Link>
-          </div>
-        ) : (
-          <div className="flex gap-4 justify-center mb-8">
-            <Link
-              href="/login"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition"
-            >
-              Iniciar Sesión
-            </Link>
-            <Link
-              href="/register"
-              className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-8 rounded-lg transition"
-            >
-              Registrarse
-            </Link>
-          </div>
-        )}
+      {/* Glow Orbs */}
+      <div className="glow-orb glow-orb-1"></div>
+      <div className="glow-orb glow-orb-2"></div>
+      <div className="glow-orb glow-orb-3"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">🔐 Seguro</h3>
-            <p className="text-gray-600">
-              Autenticación con JWT y cookies HttpOnly
-            </p>
+      {/* Pulse Rings */}
+      <div className="pulse-ring pulse-ring-1"></div>
+      <div className="pulse-ring pulse-ring-2"></div>
+      <div className="pulse-ring pulse-ring-3"></div>
+
+      {/* Floating Particles */}
+      <div className="particle"></div>
+      <div className="particle"></div>
+      <div className="particle"></div>
+      <div className="particle"></div>
+      <div className="particle"></div>
+
+      {/* Hero Section */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4 py-20 relative z-10 fade-in-up" suppressHydrationWarning>
+        <div className="max-w-4xl w-full text-center" suppressHydrationWarning>
+          {/* Logo */}
+          <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+            <span className="text-white font-bold text-4xl">A</span>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">🌐 OAuth</h3>
-            <p className="text-gray-600">
-              Integración con GitHub y Google
-            </p>
+
+          {/* Main Heading */}
+          <h1 className="text-6xl font-bold text-white mb-6 leading-tight">
+            Autenticación Empresarial
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+              de Nivel Profesional
+            </span>
+          </h1>
+
+          <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
+            Plataforma segura con autenticación moderna, OAuth integrado y gestión de sesiones empresarial
+          </p>
+
+          {/* CTA Buttons */}
+          {session ? (
+            <div className="bg-slate-800 rounded-2xl shadow-2xl p-8 mb-12 border border-slate-700">
+              <p className="text-lg text-slate-300 mb-2">
+                Bienvenido,
+              </p>
+              <p className="text-3xl font-bold text-white mb-2">
+                {session.user?.name}
+              </p>
+              <p className="text-slate-400 mb-6">
+                {session.user?.email}
+              </p>
+              <Link
+                href="/dashboard"
+                className="inline-block bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg hover:shadow-blue-500/50"
+              >
+                Ir al Dashboard
+              </Link>
+            </div>
+          ) : (
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Link
+                href="/login"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all shadow-lg hover:shadow-blue-500/50"
+              >
+                Iniciar Sesión
+              </Link>
+              <Link
+                href="/register"
+                className="bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-8 rounded-lg transition-all border border-slate-600 hover:border-slate-500"
+              >
+                Crear Cuenta
+              </Link>
+            </div>
+          )}
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700 hover:border-blue-500 transition group card-hover">
+              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition">
+                <span className="text-2xl">🔐</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Seguridad Empresarial</h3>
+              <p className="text-slate-400">
+                JWT con cookies HttpOnly, CSRF protection y encriptación de nivel profesional
+              </p>
+            </div>
+
+            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700 hover:border-blue-500 transition group card-hover">
+              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition">
+                <span className="text-2xl">🌐</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">OAuth Integrado</h3>
+              <p className="text-slate-400">
+                Autenticación con GitHub y Google para acceso rápido y seguro
+              </p>
+            </div>
+
+            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700 hover:border-blue-500 transition group card-hover">
+              <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition">
+                <span className="text-2xl">🔥</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2">Firebase Backend</h3>
+              <p className="text-slate-400">
+                Gestión de usuarios con Firebase Auth y contraseñas hasheadas con bcrypt
+              </p>
+            </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">🔥 Firebase</h3>
-            <p className="text-gray-600">
-              Gestión de usuarios con Firebase Auth
-            </p>
+
+          {/* Additional Features */}
+          <div className="mt-16 bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-700/50 rounded-2xl p-8">
+            <h2 className="text-2xl font-bold text-white mb-8">Características Incluidas</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">✓</span>
+                </span>
+                <span className="text-slate-300">Autenticación por Email/Contraseña</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">✓</span>
+                </span>
+                <span className="text-slate-300">Middleware de Protección de Rutas</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">✓</span>
+                </span>
+                <span className="text-slate-300">Server Components Seguros</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">✓</span>
+                </span>
+                <span className="text-slate-300">TypeScript Completo</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">✓</span>
+                </span>
+                <span className="text-slate-300">Diseño Responsivo</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">✓</span>
+                </span>
+                <span className="text-slate-300">Listo para Producción</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-700 py-8 px-4 relative z-10">
+        <div className="max-w-4xl mx-auto text-center text-slate-400 text-sm">
+          <p>Plataforma de autenticación empresarial segura y moderna</p>
+        </div>
+      </footer>
     </main>
   );
 }
