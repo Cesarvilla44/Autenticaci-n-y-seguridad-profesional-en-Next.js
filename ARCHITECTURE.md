@@ -1,4 +1,4 @@
-# 🏗️ Arquitectura de la Aplicación
+ñ# 🏗️ Arquitectura de la Aplicación
 
 Este documento explica cómo funciona el sistema de autenticación en esta aplicación Next.js.
 
