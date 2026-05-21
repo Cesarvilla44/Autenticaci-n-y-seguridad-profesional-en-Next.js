@@ -43,19 +43,19 @@ export default async function Home() {
           <h1 className="text-6xl font-bold text-white mb-6 leading-tight">
             Autenticación Empresarial
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
-              de Nivel Profesional
+              de Nivel Profesional.
             </span>
           </h1>
 
           <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto">
-            Plataforma segura con autenticación moderna, OAuth integrado y gestión de sesiones empresarial
+            Plataforma segura con autenticación moderna, OAuth integrado y gestión de sesiones empresarial.
           </p>
 
           {/* CTA Buttons */}
           {session ? (
             <div className="bg-slate-800 rounded-2xl shadow-2xl p-8 mb-12 border border-slate-700">
               <p className="text-lg text-slate-300 mb-2">
-                Bienvenido,
+                Bienvenido.
               </p>
               <p className="text-3xl font-bold text-white mb-2">
                 {session.user?.name}
@@ -93,9 +93,9 @@ export default async function Home() {
               <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition">
                 <span className="text-2xl">🔐</span>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Seguridad Empresarial</h3>
+              <h3 className="text-lg font-bold text-white mb-2">Seguridad Empresarial.</h3>
               <p className="text-slate-400">
-                JWT con cookies HttpOnly, CSRF protection y encriptación de nivel profesional
+                JWT con cookies HttpOnly, CSRF protection y encriptación de nivel profesional.
               </p>
             </div>
 
@@ -103,9 +103,9 @@ export default async function Home() {
               <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition">
                 <span className="text-2xl">🌐</span>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">OAuth Integrado</h3>
+              <h3 className="text-lg font-bold text-white mb-2">OAuth Integrado.</h3>
               <p className="text-slate-400">
-                Autenticación con GitHub y Google para acceso rápido y seguro
+                Autenticación con GitHub y Google para acceso rápido y seguro.
               </p>
             </div>
 
@@ -113,52 +113,52 @@ export default async function Home() {
               <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition">
                 <span className="text-2xl">🔥</span>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Firebase Backend</h3>
+              <h3 className="text-lg font-bold text-white mb-2">Firebase Backend.</h3>
               <p className="text-slate-400">
-                Gestión de usuarios con Firebase Auth y contraseñas hasheadas con bcrypt
+                Gestión de usuarios con Firebase Auth y contraseñas hasheadas con bcrypt.
               </p>
             </div>
           </div>
 
           {/* Additional Features */}
           <div className="mt-16 bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-700/50 rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-8">Características Incluidas</h2>
+            <h2 className="text-2xl font-bold text-white mb-8">Características Incluidas.</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
                   <span className="text-green-400 text-sm">✓</span>
                 </span>
-                <span className="text-slate-300">Autenticación por Email/Contraseña</span>
+                <span className="text-slate-300">Autenticación por Email/Contraseña.</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
                   <span className="text-green-400 text-sm">✓</span>
                 </span>
-                <span className="text-slate-300">Middleware de Protección de Rutas</span>
+                <span className="text-slate-300">Middleware de Protección de Rutas.</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
                   <span className="text-green-400 text-sm">✓</span>
                 </span>
-                <span className="text-slate-300">Server Components Seguros</span>
+                <span className="text-slate-300">Server Components Seguros.</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
                   <span className="text-green-400 text-sm">✓</span>
                 </span>
-                <span className="text-slate-300">TypeScript Completo</span>
+                <span className="text-slate-300">TypeScript Completo.</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
                   <span className="text-green-400 text-sm">✓</span>
                 </span>
-                <span className="text-slate-300">Diseño Responsivo</span>
+                <span className="text-slate-300">Diseño Responsivo.</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
                   <span className="text-green-400 text-sm">✓</span>
                 </span>
-                <span className="text-slate-300">Listo para Producción</span>
+                <span className="text-slate-300">Listo para Producción.</span>
               </div>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default async function Home() {
       {/* Footer */}
       <footer className="border-t border-slate-700 py-8 px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-slate-400 text-sm">
-          <p>Plataforma de autenticación empresarial segura y moderna</p>
+          <p>© 2026, Proyecto de Autenticación Profesional en Next.js.</p>
         </div>
       </footer>
     </main>
