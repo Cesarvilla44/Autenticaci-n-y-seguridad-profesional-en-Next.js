@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -44,45 +43,29 @@ export default function RegisterPage() {
     }
 
     try {
-      // Registrar usuario en Firebase
-      const signUpRes = await fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: formData.email,
-            password: formData.password,
-            displayName: formData.displayName,
-            returnSecureToken: true,
-          }),
-        }
-      );
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          displayName: formData.displayName,
+        }),
+      });
 
-      const signUpData = await signUpRes.json();
+      const data = await res.json();
 
-      if (!signUpRes.ok) {
-        if (signUpData.error?.message === "EMAIL_EXISTS") {
-          setError("Este email ya está registrado");
-        } else {
-          setError(signUpData.error?.message || "Error al registrarse");
-        }
-        setLoading(false);
+      if (!res.ok) {
+        setError(data.error || "Error al registrarse");
         return;
       }
 
-      // Iniciar sesión automáticamente después del registro
-      const result = await signIn("credentials", {
-        email: formData.email,
-        password: formData.password,
-        redirect: false,
-      });
+      // Guardar en localStorage
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
 
-      if (result?.ok) {
-        router.push("/dashboard");
-      } else {
-        setError("Registro exitoso, pero hubo un error al iniciar sesión");
-      }
+      // Redirigir al dashboard
+      router.push("/dashboard");
     } catch (err) {
       setError("Error al registrarse. Intenta de nuevo.");
       console.error(err);
@@ -94,8 +77,8 @@ export default function RegisterPage() {
   return (
     <main className="animated-bg min-h-screen flex items-center justify-center px-4 py-12 relative" suppressHydrationWarning>
       {/* Glow Orbs */}
-      <div className="glow-orb glow-orb-1"></div>
-      <div className="glow-orb glow-orb-2"></div>
+      <div className="glow-orb glow-orb-1" suppressHydrationWarning></div>
+      <div className="glow-orb glow-orb-2" suppressHydrationWarning></div>
 
       <div className="w-full max-w-md relative z-10">
         {/* Card Container */}

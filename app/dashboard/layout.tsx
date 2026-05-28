@@ -1,16 +1,16 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import Navbar from "@/components/navbar";
+import { cookies } from "next/headers";
+import Navbar from "../../components/navbar";
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const cookieStore = await cookies();
+  const authToken = cookieStore.get("auth-token")?.value;
 
-  if (!session) {
+  if (!authToken) {
     redirect("/login");
   }
 

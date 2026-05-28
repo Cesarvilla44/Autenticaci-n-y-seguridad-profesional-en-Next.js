@@ -1,9 +1,10 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
+import { cookies } from "next/headers";
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions);
+  const cookieStore = await cookies();
+  const authUser = cookieStore.get("auth-user")?.value;
+  const user = authUser ? JSON.parse(authUser) : null;
 
   return (
     <div className="animated-bg min-h-screen py-12 px-4 relative" suppressHydrationWarning>
@@ -73,19 +74,19 @@ export default async function DashboardPage() {
               <div className="pb-6 border-b border-slate-700">
                 <p className="text-slate-400 text-sm mb-2">Nombre Completo</p>
                 <p className="text-xl font-semibold text-white">
-                  {session?.user?.name || "No disponible"}
+                  {user?.name || "No disponible"}
                 </p>
               </div>
               <div className="pb-6 border-b border-slate-700">
                 <p className="text-slate-400 text-sm mb-2">Email Corporativo</p>
                 <p className="text-xl font-semibold text-white">
-                  {session?.user?.email}
+                  {user?.email || "No disponible"}
                 </p>
               </div>
               <div>
                 <p className="text-slate-400 text-sm mb-2">ID de Usuario</p>
                 <p className="text-sm font-mono text-slate-300 break-all bg-slate-900 p-3 rounded-lg">
-                  {session?.user?.id || "No disponible"}
+                  {user?.id || "No disponible"}
                 </p>
               </div>
             </div>
@@ -212,19 +213,19 @@ export default async function DashboardPage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link
-              href="/docs/seguridad/oauth.md"
+              href="/docs/seguridad/oauth"
               className="block p-4 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 hover:border-blue-500 transition text-blue-400 hover:text-blue-300 font-semibold"
             >
               → Flujo OAuth 2.0
             </Link>
             <Link
-              href="/docs/seguridad/middleware.md"
+              href="/docs/seguridad/middleware"
               className="block p-4 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 hover:border-blue-500 transition text-blue-400 hover:text-blue-300 font-semibold"
             >
               → Protección de Rutas
             </Link>
             <Link
-              href="/docs/seguridad/credenciales.md"
+              href="/docs/seguridad/credenciales"
               className="block p-4 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 hover:border-blue-500 transition text-blue-400 hover:text-blue-300 font-semibold"
             >
               → Gestión de Credenciales

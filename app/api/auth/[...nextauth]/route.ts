@@ -1,58 +1,48 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import GoogleProvider from "next-auth/providers/google";
+import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+import { verifyFirebaseCredentials } from "../../../../src/utils/firebase-auth";
 
-export const authOptions: NextAuthOptions = {
+const handler = NextAuth({
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID || "",
-      clientSecret: process.env.GITHUB_SECRET || "",
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID || "",
-      clientSecret: process.env.GOOGLE_SECRET || "",
+    GitHubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
     }),
     CredentialsProvider({
-      name: "Credenciales",
+      name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "tu@email.com" },
-        password: { label: "Contraseña", type: "password" },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          return null;
+          throw new Error("Email y contraseña son requeridos");
         }
 
         try {
-          // Validación contra Firebase usando su REST API
-          const res = await fetch(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                email: credentials.email,
-                password: credentials.password,
-                returnSecureToken: true,
-              }),
-            }
+          // Verificar credenciales con Firebase
+          const firebaseUser = await verifyFirebaseCredentials(
+            credentials.email,
+            credentials.password
           );
 
-          const user = await res.json();
-
-          if (res.ok && user.localId) {
-            return {
-              id: user.localId,
-              email: user.email,
-              name: user.displayName || user.email.split("@")[0],
-            };
+          if (!firebaseUser.localId || !firebaseUser.idToken) {
+            throw new Error("Credenciales inválidas");
           }
 
-          return null;
+          // Retornar el usuario con los datos de Firebase
+          return {
+            id: firebaseUser.localId,
+            email: firebaseUser.email,
+            name: firebaseUser.displayName || credentials.email.split("@")[0],
+            image: null,
+          };
         } catch (error) {
-          console.error("Error en authorize:", error);
-          return null;
+          const errorMessage =
+            error instanceof Error ? error.message : "Error de autenticación";
+          console.error("Firebase auth error:", errorMessage);
+          throw new Error(errorMessage);
         }
       },
     }),
@@ -60,13 +50,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
     error: "/login",
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 días
-  },
-  jwt: {
-    maxAge: 30 * 24 * 60 * 60, // 30 días
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -82,7 +65,14 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-};
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  jwt: {
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+});
 
-const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
