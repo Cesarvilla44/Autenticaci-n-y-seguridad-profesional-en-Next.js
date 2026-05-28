@@ -9,7 +9,13 @@ type NavbarUser = {
   email?: string;
 };
 
-export default function Navbar({ user }: { user?: NavbarUser | null }) {
+export default function Navbar({
+  user,
+  isAuthenticated = false,
+}: {
+  user?: NavbarUser | null;
+  isAuthenticated?: boolean;
+}) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
@@ -39,14 +45,16 @@ export default function Navbar({ user }: { user?: NavbarUser | null }) {
         <div className="flex items-center gap-6">
           {!mounted ? (
             <div className="w-32 h-10 bg-slate-700 rounded-lg animate-pulse"></div>
-          ) : user ? (
+          ) : isAuthenticated ? (
             <div className="flex items-center gap-4">
-              <div className="text-right hidden sm:block">
-                <p className="font-semibold text-white text-sm">
-                  {user.name}
-                </p>
-                <p className="text-slate-400 text-xs">{user.email}</p>
-              </div>
+              {user ? (
+                <div className="text-right hidden sm:block">
+                  <p className="font-semibold text-white text-sm">
+                    {user.name}
+                  </p>
+                  <p className="text-slate-400 text-xs">{user.email}</p>
+                </div>
+              ) : null}
               <button
                 onClick={handleLogout}
                 className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all shadow-lg hover:shadow-red-500/50"

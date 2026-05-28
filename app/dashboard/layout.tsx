@@ -19,7 +19,7 @@ export default async function DashboardLayout({
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar user={user} />
+      <Navbar user={user} isAuthenticated={true} />
       <main className="flex-1 px-4 py-8 max-w-7xl mx-auto w-full">
         {children}
       </main>
