@@ -1,12 +1,15 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Navbar() {
-  const { data: session, status } = useSession();
+type NavbarUser = {
+  name?: string;
+  email?: string;
+};
+
+export default function Navbar({ user }: { user?: NavbarUser | null }) {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
@@ -15,7 +18,8 @@ export default function Navbar() {
   }, []);
 
   const handleLogout = async () => {
-    await signOut({ redirect: false });
+    await fetch("/api/auth/logout", { method: "POST" });
+    router.refresh();
     router.push("/");
   };
 
@@ -35,18 +39,13 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           {!mounted ? (
             <div className="w-32 h-10 bg-slate-700 rounded-lg animate-pulse"></div>
-          ) : status === "loading" ? (
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
-              <p className="text-slate-300 text-sm">Cargando...</p>
-            </div>
-          ) : session ? (
+          ) : user ? (
             <div className="flex items-center gap-4">
               <div className="text-right hidden sm:block">
                 <p className="font-semibold text-white text-sm">
-                  {session.user?.name}
+                  {user.name}
                 </p>
-                <p className="text-slate-400 text-xs">{session.user?.email}</p>
+                <p className="text-slate-400 text-xs">{user.email}</p>
               </div>
               <button
                 onClick={handleLogout}
